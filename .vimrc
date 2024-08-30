@@ -16,7 +16,7 @@ set undodir=~/.vim/undodir  " Sets directory for undo files.
 " Internal vim settings.
 set nowrap          " Do not wrap lines. Allow long lines to extend as far as the line goes.
 set scrolloff=8     " Minimal number of screen lines to keep above and below the cursor.
-set signcolumn=yes  " Whether or not to draw the signcolumn.
+set signcolumn=no   " Whether or not to draw the signcolumn.
 set colorcolumn=80  " Highlighted column to align the text.
 set updatetime=50   " If this many milliseconds nothing is typed the swap file will be written to disk.
 set smartindent     " Automatic indenting based on code structure.
