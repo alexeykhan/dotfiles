@@ -85,6 +85,7 @@ plugins=(
     gcloud # Completion support for GCloud 
     redis-cli # Completion for redis-cli
     helm # Completions and aliases for helm
+    git # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/git
     rust # Completion for rustc, rustup, cargo
 )
 
