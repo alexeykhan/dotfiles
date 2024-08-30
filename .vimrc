@@ -57,6 +57,43 @@ filetype indent on  " Load an indent file for the detected file type.
 
 " MAPPINGS -----------------------------------------------------------------------
 
+" NORMAL MODE
+
+" Set custom <leader> instead of \.
+" Make sure spacebar doesn't have any mapping beforehand.
+nnoremap <Space> <Nop>
+let mapleader=" "
+
+" Delete without replacing current buffer!
+nnoremap <leader>d "_d
+
+" Copy directly to clipboard for export.
+nnoremap <leader>y "+y
+nnoremap <leader>Y "+Y
+
+" Paste directly from clipboard.
+nnoremap <leader>p "+p
+nnoremap <leader>P "+P
+
+" Center cursor after searches and unfold folds.
+nnoremap n nzzzv
+nnoremap N Nzzzv
+
 " Center cursor after half-page scrolls.
 nnoremap <C-d> <C-d>zz
 nnoremap <C-u> <C-u>zz
+
+" VISUAL MODE
+"   x - visual, visual-line, visual-block
+"   v - visual, visual-line
+
+" Replace selected text with buffer contents without replacing buffer.
+xnoremap <leader>p "_dP
+
+" Select lines and move them up/down with K/J.
+vnoremap J :m '>+1<CR>gv=gv
+vnoremap K :m '<-2<CR>gv=gv
+
+
+
+
