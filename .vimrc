@@ -64,6 +64,10 @@ filetype indent on  " Load an indent file for the detected file type.
 nnoremap <Space> <Nop>
 let mapleader=" "
 
+" Open path view (file manager, explorer).
+" TODO: Probably, replace with ls?
+nnoremap <leader>pv :Ex<CR>
+
 " Delete without replacing current buffer!
 nnoremap <leader>d "_d
 
@@ -94,6 +98,11 @@ xnoremap <leader>p "_dP
 vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
 
+" INSERT MODE.
 
+" Exit insert mode.
+inoremap <C-c> <Esc>
+inoremap <C-[> <Esc>
+ 
 
 
