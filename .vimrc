@@ -57,6 +57,11 @@ let mapleader=" "
 " Do not enter EX mode, ever.
 nnoremap Q <Nop>
 
+" Shortcuts for :commands.
+nnoremap <leader>w :w
+nnoremap <leader>q :q
+nnoremap <leader>r :source $MYVIMRC<CR>
+
 " Open path view (file manager, explorer).
 " TODO: Probably, replace with ls?
 nnoremap <leader>pv :Ex<CR>
