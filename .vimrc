@@ -50,15 +50,12 @@ endfunc
 " MAPPINGS -----------------------------------------------------------------------
 
 " Make sure spacebar doesn't have any mapping beforehand.
-nnoremap <Space> <Nop>
-
 " Set custom <leader> instead of \.
+nnoremap <Space> <Nop>
 let mapleader=" "
 
 " Do not enter EX mode, ever.
 nnoremap Q <Nop>
-
-" nnoremap <leader>w :call TrimLinesAndSpaces()<CR>
 
 " Open path view (file manager, explorer).
 " TODO: Probably, replace with ls?
