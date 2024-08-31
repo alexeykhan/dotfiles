@@ -3,7 +3,7 @@
 
 au BufNewFile,BufFilePre,BufRead *.md set filetype=markdown
 
-" LAYOUT & SETTINGS --------------------------------------------------------------- 
+" LAYOUT & SETTINGS ---------------------------------------------------------------
 
 "set termguicolors
 
@@ -24,8 +24,8 @@ set history=1000    " Set the commands to save in history default number is 20.
 set wildmenu        " Display completion matches in a status line
 
 " Meta information about current scene.
-set number          " Preceed each line with its line number. 
-set relativenumber  " Show the line number relative to the line with the cursor. 
+set number          " Preceed each line with its line number.
+set relativenumber  " Show the line number relative to the line with the cursor.
 set ruler           " Show the line and column number of the cursor position
 set showcmd         " Show (partial) command in the last line of the screen.
 
@@ -37,18 +37,18 @@ set nocursorcolumn
 " Tabulation settings.
 set tabstop=4     " Set tab width to 4 columns.
 set softtabstop=4 " Number of spaces inside INSERT mode.
-set shiftwidth=4  " Default shift width for auto indenting. 
+set shiftwidth=4  " Default shift width for auto indenting.
 set expandtab     " Use space characters instead of tabs.
- 
-" SEARCH --------------------------------------------------------------------------- 
+
+" SEARCH ---------------------------------------------------------------------------
 
 set ignorecase	" Ignore case while searching.
 set smartcase   " Override the ignorecase option if searching for capital letters.
 
-set incsearch   " Show search results while typing query. 
+set incsearch   " Show search results while typing query.
 set nohlsearch
 
-" FILETYPE & SYNTAX HIGHLIGHTING ------------------------------------------------- 
+" FILETYPE & SYNTAX HIGHLIGHTING -------------------------------------------------
 
 syntax on           " Set syntax highlight.
 filetype on         " Enable type file detection.
@@ -57,10 +57,32 @@ filetype indent on  " Load an indent file for the detected file type.
 
 " MAPPINGS -----------------------------------------------------------------------
 
-" Set custom <leader> instead of \.
 " Make sure spacebar doesn't have any mapping beforehand.
 nnoremap <Space> <Nop>
+
+" Set custom <leader> instead of \.
 let mapleader=" "
+
+" Do not enter EX mode, ever.
+nnoremap Q <Nop>
+
+function! TrimLinesAndSpaces()
+    " Trim whitespaces at the end of each line.
+    %s/\s\+$//e
+    " Replace multiple consecutive empty lines with single one.
+    %s/\(\n\s*\)\{3,}/\r\r/ge
+    " Remove trailing empty / whitespace lines.
+    "   1. Move the end of file;
+    "   2. Set a substitution range from the first non-whitespace line,
+    "      to the end of file;
+    "   3. Replace any whitespace / linebreak.
+    norm! G<CR>
+    ?^\S?,$s/\n\s*//ge
+    " Write file.
+    w
+endfunction
+
+nnoremap <leader>w :call TrimLinesAndSpaces()<CR>
 
 " Open path view (file manager, explorer).
 " TODO: Probably, replace with ls?
@@ -96,6 +118,3 @@ vnoremap K :m '<-2<CR>gv=gv
 " Exit insert mode.
 inoremap <C-c> <Esc>
 inoremap <C-[> <Esc>
- 
-
-
