@@ -79,13 +79,12 @@ nnoremap <leader>Y "+Y
 nnoremap <leader>p "+p
 nnoremap <leader>P "+P
 
-" Center cursor after searches and unfold folds.
+" Center cursor after searches, half-page scrolls, line joins.
 nnoremap n nzzzv
 nnoremap N Nzzzv
-
-" Center cursor after half-page scrolls.
 nnoremap <C-d> <C-d>zz
 nnoremap <C-u> <C-u>zz
+nnoremap J mzJ`z
 
 " VISUAL MODE
 "   x - visual, visual-line, visual-block
