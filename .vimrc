@@ -1,7 +1,99 @@
 " Get the defaults that most users want.
 " source $VIMRUNTIME/defaults.vim
 
-au BufNewFile,BufFilePre,BufRead *.md set filetype=markdown
+" Recognise markdown files by .md extension.
+autocmd BufNewFile,BufFilePre,BufRead *.md set filetype=markdown
+
+" Add automations for daily needs.
+augroup WorkflowAutomations
+    autocmd!
+
+    " Strip trailing whitespaces before each write.
+    autocmd BufWritePre *
+        \ :call <SID>StripTrailingWhitespaces() |
+        \ :call <SID>ReduceEmptyLines() |
+        \ :call <SID>StripTrailingLines()
+
+augroup END
+
+" Trim whitespaces at the end of each line.
+" Keep cursor on the same position after substituion.
+function! <SID>StripTrailingWhitespaces()
+    let l = line(".")
+    let c = col(".")
+    %s/\s\+$//e
+    call cursor(l, c)
+endfunc
+
+" Replace multiple consecutive empty lines with single one.
+" Keep cursor on the same position after substituion.
+function! <SID>ReduceEmptyLines()
+    let l = line(".")
+    let c = col(".")
+    %s/\(\n\s*\)\{3,}/\r\r/e
+    call cursor(l, c)
+endfunc
+
+" Strip trailing lines.
+"   1. Move the end of file;
+"   2. Search backwards for the first line with non-whitespace characters,
+"      that has a line break with any number of trailing spaces;
+"   3. Delete everything from this line to the end of file;
+function! <SID>StripTrailingLines()
+    let l = line(".")
+    let c = col(".")
+    norm! G
+    ?\S\+?,$s/\(\n\s*\)\{2,}//ge
+    call cursor(l, c)
+endfunc
+
+" MAPPINGS -----------------------------------------------------------------------
+
+" Make sure spacebar doesn't have any mapping beforehand.
+nnoremap <Space> <Nop>
+
+" Set custom <leader> instead of \.
+let mapleader=" "
+
+" Do not enter EX mode, ever.
+nnoremap Q <Nop>
+
+" nnoremap <leader>w :call TrimLinesAndSpaces()<CR>
+
+" Open path view (file manager, explorer).
+" TODO: Probably, replace with ls?
+nnoremap <leader>pv :Ex<CR>
+
+" Delete without replacing current buffer!
+nnoremap <leader>d "_d
+vnoremap <leader>d "_d
+
+" Copy directly to system clipboard for export.
+vnoremap <leader>y "+y
+nnoremap <leader>y "+y
+nnoremap <leader>Y "+Y
+
+" Paste directly from system clipboard.
+nnoremap <leader>p "+p
+nnoremap <leader>P "+P
+
+" Replace selected text with buffer contents without replacing buffer.
+xnoremap <leader>p "_dP
+
+" Center cursor after searches, half-page scrolls, line joins.
+nnoremap n nzzzv
+nnoremap N Nzzzv
+nnoremap <C-d> <C-d>zz
+nnoremap <C-u> <C-u>zz
+nnoremap J mzJ`z
+
+" Select lines and move them up/down with K/J.
+vnoremap J :m '>+1<CR>gv=gv
+vnoremap K :m '<-2<CR>gv=gv
+
+" Exit insert mode.
+inoremap <C-c> <Esc>
+inoremap <C-[> <Esc>
 
 " LAYOUT & SETTINGS ---------------------------------------------------------------
 
@@ -54,67 +146,3 @@ syntax on           " Set syntax highlight.
 filetype on         " Enable type file detection.
 filetype plugin on  " Enable plugins and load plugin for the detected file type.
 filetype indent on  " Load an indent file for the detected file type.
-
-" MAPPINGS -----------------------------------------------------------------------
-
-" Make sure spacebar doesn't have any mapping beforehand.
-nnoremap <Space> <Nop>
-
-" Set custom <leader> instead of \.
-let mapleader=" "
-
-" Do not enter EX mode, ever.
-nnoremap Q <Nop>
-
-function! TrimLinesAndSpaces()
-    " Trim whitespaces at the end of each line.
-    %s/\s\+$//e
-    " Replace multiple consecutive empty lines with single one.
-    %s/\(\n\s*\)\{3,}/\r\r/ge
-    " Remove trailing empty / whitespace lines.
-    "   1. Move the end of file;
-    "   2. Set a substitution range from the first non-whitespace line,
-    "      to the end of file;
-    "   3. Replace any whitespace / linebreak.
-    norm! G<CR>
-    ?^\S?,$s/\n\s*//ge
-    " Write file.
-    w
-endfunction
-
-nnoremap <leader>w :call TrimLinesAndSpaces()<CR>
-
-" Open path view (file manager, explorer).
-" TODO: Probably, replace with ls?
-nnoremap <leader>pv :Ex<CR>
-
-" Delete without replacing current buffer!
-nnoremap <leader>d "_d
-vnoremap <leader>d "_d
-
-" Copy directly to system clipboard for export.
-vnoremap <leader>y "+y
-nnoremap <leader>y "+y
-nnoremap <leader>Y "+Y
-
-" Paste directly from system clipboard.
-nnoremap <leader>p "+p
-nnoremap <leader>P "+P
-
-" Replace selected text with buffer contents without replacing buffer.
-xnoremap <leader>p "_dP
-
-" Center cursor after searches, half-page scrolls, line joins.
-nnoremap n nzzzv
-nnoremap N Nzzzv
-nnoremap <C-d> <C-d>zz
-nnoremap <C-u> <C-u>zz
-nnoremap J mzJ`z
-
-" Select lines and move them up/down with K/J.
-vnoremap J :m '>+1<CR>gv=gv
-vnoremap K :m '<-2<CR>gv=gv
-
-" Exit insert mode.
-inoremap <C-c> <Esc>
-inoremap <C-[> <Esc>
