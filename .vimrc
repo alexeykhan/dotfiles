@@ -8,7 +8,7 @@ autocmd BufNewFile,BufFilePre,BufRead *.md set filetype=markdown
 augroup WorkflowAutomations
     autocmd!
 
-    " Strip trailing whitespaces before each write.
+    " Before each write:
     autocmd BufWritePre *
         \ :call <SID>StripTrailingWhitespaces() |
         \ :call <SID>ReduceEmptyLines() |
@@ -58,9 +58,11 @@ let mapleader=" "
 nnoremap Q <Nop>
 
 " Shortcuts for :commands.
-nnoremap <leader>w :w
 nnoremap <leader>q :q
+nnoremap <leader>w :w<CR>
 nnoremap <leader>r :source $MYVIMRC<CR>
+nnoremap <leader>ms :mksession! ~/.vim/sessions/
+nnoremap <leader>ss :source ~/.vim/sessions/
 
 " Open path view (file manager, explorer).
 " TODO: Probably, replace with ls?
@@ -116,6 +118,8 @@ set updatetime=50   " If this many milliseconds nothing is typed the swap file w
 set smartindent     " Automatic indenting based on code structure.
 set history=1000    " Set the commands to save in history default number is 20.
 set wildmenu        " Display completion matches in a status line
+set splitright      " Open new window to the right of the current one.
+set splitbelow      " Open new window below the current one.
 
 " Meta information about current scene.
 set number          " Preceed each line with its line number.
