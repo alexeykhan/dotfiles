@@ -43,6 +43,10 @@ function! <SID>StripTrailingLines()
     let l = line(".")
     let c = col(".")
     norm! G
+    " Edge case: when the last line is not empty, script will delete
+    " previous empty line - above the current non-empty line.
+    " So just add one empty line to the end of file beforehand.
+    call append('$', '')
     ?\S\+?,$s/\(\n\s*\)\{2,}//ge
     call cursor(l, c)
 endfunc
