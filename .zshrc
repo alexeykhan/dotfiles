@@ -79,10 +79,10 @@ DISABLE_AUTO_TITLE="true"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-    zsh-autosuggestions 
+    zsh-autosuggestions
     zsh-syntax-highlighting
     doctl # Completion for Digital Ocean
-    gcloud # Completion support for GCloud 
+    gcloud # Completion support for GCloud
     redis-cli # Completion for redis-cli
     helm # Completions and aliases for helm
     git # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/git
@@ -149,12 +149,12 @@ export PATH=$PATH:/usr/local/lib/google-cloud-sdk/bin
 export USE_GKE_GCLOUD_AUTH_PLUGIN=True
 
 # The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/alexeykhan/Downloads/google-cloud-sdk/path.zsh.inc' ]; then 
-    . '/Users/alexeykhan/Downloads/google-cloud-sdk/path.zsh.inc' 
+if [ -f '/Users/alexeykhan/Downloads/google-cloud-sdk/path.zsh.inc' ]; then
+    . '/Users/alexeykhan/Downloads/google-cloud-sdk/path.zsh.inc'
 fi
 
 # The next line enables shell command completion for gcloud.
-if [ -f '/Users/alexeykhan/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then 
+if [ -f '/Users/alexeykhan/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then
     . '/Users/alexeykhan/Downloads/google-cloud-sdk/completion.zsh.inc'
 fi
 
