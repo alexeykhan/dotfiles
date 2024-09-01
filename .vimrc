@@ -42,11 +42,11 @@ endfunc
 function! <SID>StripTrailingLines()
     let l = line(".")
     let c = col(".")
-    norm! G
     " Edge case: when the last line is not empty, script will delete
     " previous empty line - above the current non-empty line.
     " So just add one empty line to the end of file beforehand.
     call append('$', '')
+    norm! G
     ?\S\+?,$s/\(\n\s*\)\{2,}//ge
     call cursor(l, c)
 endfunc
@@ -79,14 +79,17 @@ vnoremap <leader>d "_d
 " Copy directly to system clipboard for export.
 vnoremap <leader>y "+y
 nnoremap <leader>y "+y
+vnoremap <leader>Y "+Y
 nnoremap <leader>Y "+Y
 
 " Paste directly from system clipboard.
+vnoremap <leader>p "+p
 nnoremap <leader>p "+p
+vnoremap <leader>P "+P
 nnoremap <leader>P "+P
 
 " Replace selected text with buffer contents without replacing buffer.
-xnoremap <leader>p "_dP
+xnoremap <leader>dp "_dP
 
 " Center cursor after searches, half-page scrolls, line joins.
 nnoremap n nzzzv
