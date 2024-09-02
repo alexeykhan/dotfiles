@@ -58,7 +58,8 @@ augroup Workspace
     autocmd BufWritePre *
         \ :call <SID>StripTrailingWhitespaces() |
         \ :call <SID>ReduceEmptyLines() |
-        \ :call <SID>StripTrailingLines()
+        \ :call <SID>StripTrailingLines() |
+        \ :retab " Turn existing tabs into spaces
 
 augroup END
 
