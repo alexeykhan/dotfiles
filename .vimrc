@@ -1,67 +1,25 @@
 " Get the defaults that most users want.
 " source $VIMRUNTIME/defaults.vim
 
-" PLUGINS -------------------------------------------------------------------
+" AUTOMATIONS --------------------------------------------------------------
 
 " Install plug.vim if not installed yet.
 let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
 if empty(glob(data_dir . '/autoload/plug.vim'))
-  silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+    " Download plug.vim.
+    silent execute '!curl -fLo ' . data_dir . '/autoload/plug.vim --create-dirs '
+        \ . 'https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 
-  " Install plugins.
-  autocmd VimEnter *
-      \ PlugInstall --sync |
-      \ source $MYVIMRC
+    " Install plugins.
+    autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
-
-" Install plugins.
-call plug#begin()
-" Status / tab line.
-Plug 'itchyny/lightline.vim'
-
-" Syntax highlighting.
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
-
-" Color schemes.
-Plug 'rose-pine/vim'
-Plug 'morhetz/gruvbox'
-Plug 'catppuccin/vim', { 'as': 'catppuccin' }
-call plug#end()
-
-" `rosepine` options.
-let g:lightline = { 'colorscheme': 'rosepine' }
-
-" `gruvbox` options.
-let g:gruvbox_bold=1
-let g:gruvbox_contrast_dark='hard'
-let g:gruvbox_contrast_light='medium'
-
-" `vim-go` options.
-let g:go_highlight_build_constraints = 1
-let g:go_highlight_generate_tags = 1
-let g:go_highlight_array_whitespace_error = 1
-let g:go_highlight_trailing_whitespace_error = 1
-let g:go_highlight_chan_whitespace_error = 1
-let g:go_highlight_space_tab_error = 1
-let g:go_highlight_functions = 1
-let g:go_highlight_function_calls = 1
-let g:go_highlight_variable_declarations = 1
-let g:go_highlight_variable_assignments = 1
-let g:go_highlight_types = 1
-let g:go_highlight_extra_types = 1
-let g:go_highlight_fields = 1
-let g:go_highlight_methods = 1
-let g:go_highlight_operators = 1
-
-" AUTOMATIONS --------------------------------------------------------------
 
 " Add automations for daily needs.
 augroup Workspace
     autocmd!
 
     " Recognise markdown files by .md extension.
-    autocmd BufNewFile,BufFilePre,BufRead *.md
-        \ set filetype=markdown
+    autocmd BufNewFile,BufFilePre,BufRead *.md set filetype=markdown
 
     " Before each write:
     autocmd BufWritePre *
@@ -107,20 +65,77 @@ function! <SID>StripTrailingLines()
     call cursor(l, c)
 endfunc
 
-" FILETYPE & SYNTAX HIGHLIGHTING -------------------------------------------------
+" Get current filepath.
+" If git repository: relative to repository root.
+" If inside home directory: relative to home.
+" Otherwise, absolute from root.
+function! LightlineFilename()
+    let filepath = expand('%:p')
+    let gitpath = fnamemodify(get(b:, 'gitbranch_path'), ':h:h')
+    if filepath[:len(gitpath)-1] ==# gitpath
+        return filepath[len(gitpath)+1:]
+    endif
+    if filepath[:len($HOME)-1] ==# $HOME
+        return '~/' . filepath[len($HOME)+1:]
+    endif
+    return filepath
+endfunc
 
-syntax on           " Set syntax highlight.
-filetype on         " Enable type file detection.
-filetype plugin on  " Enable plugins and load plugin for the detected file type.
-filetype indent on  " Load an indent file for the detected file type.
+" PLUGINS -------------------------------------------------------------------
 
-set termguicolors   " Enable terminal colors.
-set background=dark " Set dark theme background.
-set laststatus=2    " Always show a status line.
+" Install plugins.
+call plug#begin()
+" -------------------------- Status / tab line.
+Plug 'itchyny/lightline.vim'
+Plug 'itchyny/vim-gitbranch'
+" -------------------------- Syntax highlighting.
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+" -------------------------- Color schemes.
+Plug 'rose-pine/vim'
+Plug 'morhetz/gruvbox'
+Plug 'catppuccin/vim', { 'as': 'catppuccin' }
+call plug#end()
 
-" Color schemes should be loaded after plug#end().
-" Prepend it with 'silent!' to ignore errors when it's not yet installed.
-silent! colorscheme rosepine " gruvbox
+" GLOBAL VARIABLES ------------------------------------------------------------
+
+" Pre-defined variables.
+let g:disable_bg = 0
+let g:disable_float_bg = 0
+
+" `lightline` options.
+let g:lightline = {
+    \ 'colorscheme': 'rosepine',
+    \ 'active': {
+    \   'left': [ [ 'mode', 'paste' ],
+    \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+    \ },
+    \ 'component_function': {
+    \   'gitbranch': 'gitbranch#name',
+    \   'filename': 'LightlineFilename',
+    \ },
+    \ }
+
+" `gruvbox` options.
+let g:gruvbox_bold=1
+let g:gruvbox_contrast_dark='hard'
+let g:gruvbox_contrast_light='medium'
+
+" `vim-go` options.
+let g:go_highlight_build_constraints = 1
+let g:go_highlight_generate_tags = 1
+let g:go_highlight_array_whitespace_error = 1
+let g:go_highlight_trailing_whitespace_error = 1
+let g:go_highlight_chan_whitespace_error = 1
+let g:go_highlight_space_tab_error = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_function_calls = 1
+let g:go_highlight_variable_declarations = 1
+let g:go_highlight_variable_assignments = 1
+let g:go_highlight_types = 1
+let g:go_highlight_extra_types = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_operators = 1
 
 " MAPPINGS -----------------------------------------------------------------------
 
@@ -180,6 +195,16 @@ inoremap <C-[> <Esc>
 
 " LAYOUT & SETTINGS ---------------------------------------------------------------
 
+" Syntax highlighting.
+syntax on           " Set syntax highlight.
+filetype on         " Enable type file detection.
+filetype plugin on  " Enable plugins and load plugin for the detected file type.
+filetype indent on  " Load an indent file for the detected file type.
+
+" Color schemes should be loaded after plug#end().
+" Prepend it with 'silent!' to ignore errors when it's not yet installed.
+silent! colorscheme rosepine " gruvbox
+
 " External vim behaviour.
 set autochdir               " Change current dir (same as open file).
 set noswapfile              " Turns swapfiles off.
@@ -198,8 +223,11 @@ set history=1000    " Set the commands to save in history default number is 20.
 set wildmenu        " Display completion matches in a status line
 set splitright      " Open new window to the right of the current one.
 set splitbelow      " Open new window below the current one.
+set termguicolors   " Enable terminal colors.
+set background=dark " Set dark theme background.
 
 " Meta information about current scene.
+set laststatus=2    " Always show a status line.
 set number          " Preceed each line with its line number.
 set relativenumber  " Show the line number relative to the line with the cursor.
 set ruler           " Show the line and column number of the cursor position
