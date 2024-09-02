@@ -1,12 +1,58 @@
 " Get the defaults that most users want.
 " source $VIMRUNTIME/defaults.vim
 
-" Recognise markdown files by .md extension.
-autocmd BufNewFile,BufFilePre,BufRead *.md set filetype=markdown
+" PLUGINS -------------------------------------------------------------------
+
+" Install plug.vim if not installed yet.
+let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
+if empty(glob(data_dir . '/autoload/plug.vim'))
+  silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+
+  " Install plugins.
+  autocmd VimEnter *
+      \ PlugInstall --sync |
+      \ source $MYVIMRC
+endif
+
+" Install plugins.
+call plug#begin()
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Plug 'morhetz/gruvbox'
+" Plug 'catppuccin/vim', { 'as': 'catppuccin' }
+" Plug 'rose-pine/vim'
+call plug#end()
+
+" `gruvbox` options.
+let g:gruvbox_bold=1
+let g:gruvbox_contrast_dark='hard'
+let g:gruvbox_contrast_light='medium'
+
+" `vim-go` options.
+let g:go_highlight_build_constraints = 1
+let g:go_highlight_generate_tags = 1
+let g:go_highlight_array_whitespace_error = 1
+let g:go_highlight_trailing_whitespace_error = 1
+let g:go_highlight_chan_whitespace_error = 1
+let g:go_highlight_space_tab_error = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_function_calls = 1
+let g:go_highlight_variable_declarations = 1
+let g:go_highlight_variable_assignments = 1
+let g:go_highlight_types = 1
+let g:go_highlight_extra_types = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_operators = 1
+
+" AUTOMATIONS --------------------------------------------------------------
 
 " Add automations for daily needs.
-augroup WorkflowAutomations
+augroup Workspace
     autocmd!
+
+    " Recognise markdown files by .md extension.
+    autocmd BufNewFile,BufFilePre,BufRead *.md
+        \ set filetype=markdown
 
     " Before each write:
     autocmd BufWritePre *
@@ -50,6 +96,17 @@ function! <SID>StripTrailingLines()
     ?\S\+?,$s/\(\n\s*\)\{2,}//ge
     call cursor(l, c)
 endfunc
+
+" FILETYPE & SYNTAX HIGHLIGHTING -------------------------------------------------
+
+syntax on           " Set syntax highlight.
+filetype on         " Enable type file detection.
+filetype plugin on  " Enable plugins and load plugin for the detected file type.
+filetype indent on  " Load an indent file for the detected file type.
+
+set termguicolors
+set background=dark
+colorscheme gruvbox
 
 " MAPPINGS -----------------------------------------------------------------------
 
@@ -109,8 +166,6 @@ inoremap <C-[> <Esc>
 
 " LAYOUT & SETTINGS ---------------------------------------------------------------
 
-"set termguicolors
-
 " External vim behaviour.
 set autochdir               " Change current dir (same as open file).
 set noswapfile              " Turns swapfiles off.
@@ -154,10 +209,3 @@ set smartcase   " Override the ignorecase option if searching for capital letter
 
 set incsearch   " Show search results while typing query.
 set nohlsearch
-
-" FILETYPE & SYNTAX HIGHLIGHTING -------------------------------------------------
-
-syntax on           " Set syntax highlight.
-filetype on         " Enable type file detection.
-filetype plugin on  " Enable plugins and load plugin for the detected file type.
-filetype indent on  " Load an indent file for the detected file type.
