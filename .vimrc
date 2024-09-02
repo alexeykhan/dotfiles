@@ -16,11 +16,20 @@ endif
 
 " Install plugins.
 call plug#begin()
+" Status / tab line.
+Plug 'itchyny/lightline.vim'
+
+" Syntax highlighting.
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+
+" Color schemes.
+Plug 'rose-pine/vim'
 Plug 'morhetz/gruvbox'
-" Plug 'catppuccin/vim', { 'as': 'catppuccin' }
-" Plug 'rose-pine/vim'
+Plug 'catppuccin/vim', { 'as': 'catppuccin' }
 call plug#end()
+
+" `rosepine` options.
+let g:lightline = { 'colorscheme': 'rosepine' }
 
 " `gruvbox` options.
 let g:gruvbox_bold=1
@@ -105,9 +114,13 @@ filetype on         " Enable type file detection.
 filetype plugin on  " Enable plugins and load plugin for the detected file type.
 filetype indent on  " Load an indent file for the detected file type.
 
-set termguicolors
-set background=dark
-colorscheme gruvbox
+set termguicolors   " Enable terminal colors.
+set background=dark " Set dark theme background.
+set laststatus=2    " Always show a status line.
+
+" Color schemes should be loaded after plug#end().
+" Prepend it with 'silent!' to ignore errors when it's not yet installed.
+silent! colorscheme rosepine " gruvbox
 
 " MAPPINGS -----------------------------------------------------------------------
 
@@ -205,7 +218,7 @@ set expandtab     " Use space characters instead of tabs.
 
 " SEARCH ---------------------------------------------------------------------------
 
-set ignorecase	" Ignore case while searching.
+set ignorecase  " Ignore case while searching.
 set smartcase   " Override the ignorecase option if searching for capital letters.
 
 set incsearch   " Show search results while typing query.
