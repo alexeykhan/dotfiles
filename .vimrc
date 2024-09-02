@@ -89,7 +89,8 @@ vnoremap <leader>P "+P
 nnoremap <leader>P "+P
 
 " Replace selected text with buffer contents without replacing buffer.
-xnoremap <leader>dp "_dP
+xnoremap <leader>dp "_dp
+xnoremap <leader>dP "_dP
 
 " Center cursor after searches, half-page scrolls, line joins.
 nnoremap n nzzzv
@@ -111,6 +112,7 @@ inoremap <C-[> <Esc>
 "set termguicolors
 
 " External vim behaviour.
+set autochdir               " Change current dir (same as open file).
 set noswapfile              " Turns swapfiles off.
 set nobackup                " Turns backup files off.
 set undofile                " Turns undofiles on.
