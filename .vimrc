@@ -98,22 +98,34 @@ call plug#end()
 
 " GLOBAL VARIABLES ------------------------------------------------------------
 
-" Pre-defined variables.
-let g:disable_bg = 0
-let g:disable_float_bg = 0
-
 " `lightline` options.
 let g:lightline = {
     \ 'colorscheme': 'rosepine',
+    \ 'tabline': {
+    \   'left': [['tabs']],
+    \   'right': []
+    \ },
     \ 'active': {
-    \   'left': [ [ 'mode', 'paste' ],
-    \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+    \   'left': [
+    \     ['mode', 'paste'],
+    \     ['gitbranch', 'filename', 'readonly', 'modified']],
+    \   'right': [
+    \     ['lineinfo'],
+    \     ['percent']]
+    \ },
+    \ 'inactive': {
+    \   'left': [['filename']],
+    \   'right': [['lineinfo'], ['percent']]
     \ },
     \ 'component_function': {
     \   'gitbranch': 'gitbranch#name',
     \   'filename': 'LightlineFilename',
     \ },
     \ }
+
+" `rose-pine` options.
+let g:disable_bg = 1
+let g:disable_float_bg = 1
 
 " `gruvbox` options.
 let g:gruvbox_bold=1
