@@ -1,0 +1,27 @@
+-- psql settings.
+
+-- Most common presets:
+-- - Expanded table view for wide tables.
+-- - Display time for all queries.
+-- - Display `null` values.
+-- - History size.
+-- - Keywords completion case.
+-- - Error reports verbosity (default, verbose, terse).
+\set QUIET 1
+\x auto
+\timing
+\pset null '(null)'
+\set HISTSIZE 2000
+\set COMP_KEYWORD_CASE upper
+\set VERBOSITY verbose
+\set QUIET 0
+
+-- Shortcuts:
+\set version 'SELECT version();'
+\set extensions 'select * from pg_available_extensions;'
+
+-- Welcome Message:
+\echo 'Welcome to PostgreSQL!\n'
+\echo 'Type ":version" to see the PostgreSQL version.'
+\echo 'Type ":extensions" to see the available extensions.'
+\echo 'Type "\\q" or "exit" to exit.\n'
