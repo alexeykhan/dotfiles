@@ -100,7 +100,7 @@ call plug#end()
 
 " `lightline` options.
 let g:lightline = {
-    \ 'colorscheme': 'rosepine',
+    \ 'colorscheme': 'gruvbox',
     \ 'tabline': {
     \   'left': [['tabs']],
     \   'right': []
@@ -129,6 +129,7 @@ let g:disable_float_bg = 1
 
 " `gruvbox` options.
 let g:gruvbox_bold=1
+let g:gruvbox_italic=0
 let g:gruvbox_contrast_dark='hard'
 let g:gruvbox_contrast_light='medium'
 
@@ -149,7 +150,64 @@ let g:go_highlight_fields = 1
 let g:go_highlight_methods = 1
 let g:go_highlight_operators = 1
 
-" MAPPINGS -----------------------------------------------------------------------
+" LAYOUT & SETTINGS ---------------------------------------------------------------
+
+" Color schemes should be loaded after plug#end().
+" Prepend it with 'silent!' to ignore errors when it's not yet installed.
+silent! colorscheme gruvbox " rosepine / gruvbox
+
+" Syntax highlighting.
+syntax on           " Set syntax highlight.
+filetype on         " Enable type file detection.
+filetype plugin on  " Enable plugins and load plugin for the detected file type.
+filetype indent on  " Load an indent file for the detected file type.
+
+" External vim behaviour.
+set autochdir               " Change current dir (same as open file).
+set noswapfile              " Turns swapfiles off.
+set nobackup                " Turns backup files off.
+set undofile                " Turns undofiles on.
+set undodir=~/.vim/undodir  " Sets directory for undo files.
+
+" Internal vim settings.
+set nowrap          " Do not wrap lines. Allow long lines to extend.
+set scrolloff=8     " Number of screen lines to keep above and below the cursor.
+set signcolumn=no   " Whether or not to draw the signcolumn.
+set colorcolumn=80  " Highlighted column to align the text.
+set updatetime=50   " Write swap file after this number of ms nothing changed.
+set smartindent     " Automatic indenting based on code structure.
+set history=1000    " Set the commands to save in history default number is 20.
+set wildmenu        " Display completion matches in a status line
+set splitright      " Open new window to the right of the current one.
+set splitbelow      " Open new window below the current one.
+set termguicolors   " Enable terminal colors.
+set background=dark " Set dark theme background.
+
+" Meta information about current scene.
+set laststatus=2    " Always show a status line.
+set number          " Preceed each line with its line number.
+set relativenumber  " Show the line number relative to the line with the cursor.
+set ruler           " Show the line and column number of the cursor position
+set showcmd         " Show (partial) command in the last line of the screen.
+
+" Tabulation settings.
+set tabstop=4     " Set tab width to 4 columns.
+set softtabstop=4 " Number of spaces inside INSERT mode.
+set shiftwidth=4  " Default shift width for auto indenting.
+set expandtab     " Use space characters instead of tabs.
+
+" Cursor settings.
+set guicursor=
+set nocursorline
+set nocursorcolumn
+
+" Search settings.
+set ignorecase  " Ignore case while searching.
+set smartcase   " Override ignorecase option when searching for capital letters.
+set incsearch   " Show search results while typing query.
+set nohlsearch
+
+" MAPPINGS --------------------------------------------------------------------
 
 " Make sure spacebar doesn't have any mapping beforehand.
 " Set custom <leader> instead of \.
@@ -167,7 +225,6 @@ nnoremap <leader>ms :mksession! ~/.vim/sessions/
 nnoremap <leader>ss :source ~/.vim/sessions/
 
 " Open path view (file manager, explorer).
-" TODO: Probably, replace with ls?
 nnoremap <leader>pv :Ex<CR>
 
 " Delete without replacing current buffer!
@@ -204,62 +261,3 @@ vnoremap K :m '<-2<CR>gv=gv
 " Exit insert mode.
 inoremap <C-c> <Esc>
 inoremap <C-[> <Esc>
-
-" LAYOUT & SETTINGS ---------------------------------------------------------------
-
-" Syntax highlighting.
-syntax on           " Set syntax highlight.
-filetype on         " Enable type file detection.
-filetype plugin on  " Enable plugins and load plugin for the detected file type.
-filetype indent on  " Load an indent file for the detected file type.
-
-" Color schemes should be loaded after plug#end().
-" Prepend it with 'silent!' to ignore errors when it's not yet installed.
-silent! colorscheme rosepine " gruvbox
-
-" External vim behaviour.
-set autochdir               " Change current dir (same as open file).
-set noswapfile              " Turns swapfiles off.
-set nobackup                " Turns backup files off.
-set undofile                " Turns undofiles on.
-set undodir=~/.vim/undodir  " Sets directory for undo files.
-
-" Internal vim settings.
-set nowrap          " Do not wrap lines. Allow long lines to extend as far as the line goes.
-set scrolloff=8     " Minimal number of screen lines to keep above and below the cursor.
-set signcolumn=no   " Whether or not to draw the signcolumn.
-set colorcolumn=80  " Highlighted column to align the text.
-set updatetime=50   " If this many milliseconds nothing is typed the swap file will be written to disk.
-set smartindent     " Automatic indenting based on code structure.
-set history=1000    " Set the commands to save in history default number is 20.
-set wildmenu        " Display completion matches in a status line
-set splitright      " Open new window to the right of the current one.
-set splitbelow      " Open new window below the current one.
-set termguicolors   " Enable terminal colors.
-set background=dark " Set dark theme background.
-
-" Meta information about current scene.
-set laststatus=2    " Always show a status line.
-set number          " Preceed each line with its line number.
-set relativenumber  " Show the line number relative to the line with the cursor.
-set ruler           " Show the line and column number of the cursor position
-set showcmd         " Show (partial) command in the last line of the screen.
-
-" Cursor settings.
-set guicursor=
-set nocursorline
-set nocursorcolumn
-
-" Tabulation settings.
-set tabstop=4     " Set tab width to 4 columns.
-set softtabstop=4 " Number of spaces inside INSERT mode.
-set shiftwidth=4  " Default shift width for auto indenting.
-set expandtab     " Use space characters instead of tabs.
-
-" SEARCH ---------------------------------------------------------------------------
-
-set ignorecase  " Ignore case while searching.
-set smartcase   " Override the ignorecase option if searching for capital letters.
-
-set incsearch   " Show search results while typing query.
-set nohlsearch
