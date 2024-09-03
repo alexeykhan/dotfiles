@@ -127,14 +127,15 @@ source $ZSH/oh-my-zsh.sh
 # ======================================================================
 
 # Global Variables
-export EDITOR="vim"
-export GOPATH="/Users/alexeykhan/go"
-export GOSUMDB="sum.golang.org"
-export GOPROXY="https://proxy.golang.org,direct"
-export GONOPROXY="gitlab.com/hiveon/*,pkg.hiveon.dev/*,github.com/alexeykhan/*,gitlab.com/uzmetrics/*,github.com/stargodev/*"
-export GOPRIVATE=",gitlab.com/hiveon/*,pkg.hiveon.dev/*,github.com/alexeykhan/*,gitlab.com/uzmetrics/*,github.com/stargodev/*"
-export GONOSUMDB=",gitlab.com/hiveon/*,pkg.hiveon.dev/*,github.com/alexeykhan/*,gitlab.com/uzmetrics/*,github.com/stargodev/*"
-export PGPASSFILE="~/.pgpass"
+export EDITOR='vim'
+export VISUAL='vim'
+export GOPATH='/Users/alexeykhan/go'
+export GOSUMDB='sum.golang.org'
+export GOPROXY='https://proxy.golang.org,direct'
+export GONOPROXY='gitlab.com/hiveon/*,pkg.hiveon.dev/*,github.com/alexeykhan/*,gitlab.com/uzmetrics/*,github.com/stargodev/*'
+export GOPRIVATE=',gitlab.com/hiveon/*,pkg.hiveon.dev/*,github.com/alexeykhan/*,gitlab.com/uzmetrics/*,github.com/stargodev/*'
+export GONOSUMDB=',gitlab.com/hiveon/*,pkg.hiveon.dev/*,github.com/alexeykhan/*,gitlab.com/uzmetrics/*,github.com/stargodev/*'
+export PGPASSFILE='~/.pgpass'
 
 #Global Binaries
 export PATH=$PATH:/usr/bin
