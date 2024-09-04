@@ -127,15 +127,15 @@ source $ZSH/oh-my-zsh.sh
 # ======================================================================
 
 # Global Variables
-export EDITOR='vim'
-export VISUAL='vim'
-export GOPATH='/Users/alexeykhan/go'
-export GOSUMDB='sum.golang.org'
-export GOPROXY='https://proxy.golang.org,direct'
-export GONOPROXY='gitlab.com/hiveon/*,pkg.hiveon.dev/*,github.com/alexeykhan/*,gitlab.com/uzmetrics/*,github.com/stargodev/*'
-export GOPRIVATE=',gitlab.com/hiveon/*,pkg.hiveon.dev/*,github.com/alexeykhan/*,gitlab.com/uzmetrics/*,github.com/stargodev/*'
-export GONOSUMDB=',gitlab.com/hiveon/*,pkg.hiveon.dev/*,github.com/alexeykhan/*,gitlab.com/uzmetrics/*,github.com/stargodev/*'
-export PGPASSFILE='~/.pgpass'
+export EDITOR="vim"
+export VISUAL="vim"
+export GOPATH="/Users/alexeykhan/go"
+export GOSUMDB="sum.golang.org"
+export GOPROXY="https://proxy.golang.org,direct"
+export GONOPROXY="gitlab.com/hiveon/*,pkg.hiveon.dev/*,github.com/alexeykhan/*,gitlab.com/uzmetrics/*,github.com/stargodev/*"
+export GOPRIVATE="gitlab.com/hiveon/*,pkg.hiveon.dev/*,github.com/alexeykhan/*,gitlab.com/uzmetrics/*,github.com/stargodev/*"
+export GONOSUMDB="gitlab.com/hiveon/*,pkg.hiveon.dev/*,github.com/alexeykhan/*,gitlab.com/uzmetrics/*,github.com/stargodev/*"
+export PGPASSFILE="~/.pgpass"
 
 #Global Binaries
 export PATH=$PATH:/usr/bin
@@ -151,13 +151,13 @@ export PATH=$PATH:/usr/local/lib/google-cloud-sdk/bin
 export USE_GKE_GCLOUD_AUTH_PLUGIN=True
 
 # The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/alexeykhan/Downloads/google-cloud-sdk/path.zsh.inc' ]; then
-    . '/Users/alexeykhan/Downloads/google-cloud-sdk/path.zsh.inc'
+if [ -f "/Users/alexeykhan/Downloads/google-cloud-sdk/path.zsh.inc" ]; then
+    . "/Users/alexeykhan/Downloads/google-cloud-sdk/path.zsh.inc"
 fi
 
 # The next line enables shell command completion for gcloud.
-if [ -f '/Users/alexeykhan/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then
-    . '/Users/alexeykhan/Downloads/google-cloud-sdk/completion.zsh.inc'
+if [ -f "/Users/alexeykhan/Downloads/google-cloud-sdk/completion.zsh.inc" ]; then
+    . "/Users/alexeykhan/Downloads/google-cloud-sdk/completion.zsh.inc"
 fi
 
 # ======================================================================
