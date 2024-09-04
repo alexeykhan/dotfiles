@@ -98,6 +98,10 @@ call plug#end()
 
 " GLOBAL VARIABLES ------------------------------------------------------------
 
+" Support italic escape codes.
+let &t_ZH="\e[3m"
+let &t_ZR="\e[23m"
+
 " `lightline` options.
 let g:lightline = {
     \ 'colorscheme': 'gruvbox',
@@ -129,9 +133,10 @@ let g:disable_float_bg = 1
 
 " `gruvbox` options.
 let g:gruvbox_bold=1
-let g:gruvbox_italic=0
+let g:gruvbox_italic=1
 let g:gruvbox_contrast_dark='hard'
 let g:gruvbox_contrast_light='medium'
+let g:gruvbox_improved_warnings=1
 
 " `vim-go` options.
 let g:go_highlight_build_constraints = 1
@@ -170,6 +175,8 @@ set undofile                " Turns undofiles on.
 set undodir=~/.vim/undodir  " Sets directory for undo files.
 
 " Internal vim settings.
+set termguicolors   " Enable terminal colors.
+set background=dark " Set dark theme background.
 set nowrap          " Do not wrap lines. Allow long lines to extend.
 set scrolloff=8     " Number of screen lines to keep above and below the cursor.
 set signcolumn=no   " Whether or not to draw the signcolumn.
@@ -180,8 +187,6 @@ set history=1000    " Set the commands to save in history default number is 20.
 set wildmenu        " Display completion matches in a status line
 set splitright      " Open new window to the right of the current one.
 set splitbelow      " Open new window below the current one.
-set termguicolors   " Enable terminal colors.
-set background=dark " Set dark theme background.
 
 " Meta information about current scene.
 set laststatus=2    " Always show a status line.
@@ -260,4 +265,3 @@ vnoremap K :m '<-2<CR>gv=gv
 
 " Exit insert mode.
 inoremap <C-c> <Esc>
-inoremap <C-[> <Esc>
