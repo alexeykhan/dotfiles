@@ -18,6 +18,11 @@ endif
 augroup Workspace
     autocmd!
 
+    " Gruvbox transparent_bg conflicts with termguicolors.
+    autocmd ColorScheme *
+        \ highlight Normal ctermbg=NONE guibg=NONE |
+        \ highlight NonText ctermbg=NONE guibg=NONE
+
     " Recognise markdown files by .md extension.
     autocmd BufNewFile,BufFilePre,BufRead *.md set filetype=markdown
 
@@ -91,20 +96,16 @@ Plug 'itchyny/vim-gitbranch'
 " -------------------------- Syntax highlighting.
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 " -------------------------- Color schemes.
-Plug 'rose-pine/vim'
-Plug 'morhetz/gruvbox'
-Plug 'catppuccin/vim', { 'as': 'catppuccin' }
+ Plug 'morhetz/gruvbox'
+" Plug 'rose-pine/vim'
+" Plug 'catppuccin/vim', { 'as': 'catppuccin' }
 call plug#end()
 
 " GLOBAL VARIABLES ------------------------------------------------------------
 
-" Support italic escape codes.
-let &t_ZH="\e[3m"
-let &t_ZR="\e[23m"
-
 " `lightline` options.
 let g:lightline = {
-    \ 'colorscheme': 'gruvbox',
+    \ 'colorscheme': 'one',
     \ 'tabline': {
     \   'left': [['tabs']],
     \   'right': []
@@ -127,6 +128,10 @@ let g:lightline = {
     \ },
     \ }
 
+" Support italic escape codes.
+let &t_ZH="\e[3m"
+let &t_ZR="\e[23m"
+
 " `rose-pine` options.
 let g:disable_bg = 1
 let g:disable_float_bg = 1
@@ -134,9 +139,9 @@ let g:disable_float_bg = 1
 " `gruvbox` options.
 let g:gruvbox_bold=1
 let g:gruvbox_italic=1
+let g:gruvbox_invert_selection=0
 let g:gruvbox_contrast_dark='hard'
 let g:gruvbox_contrast_light='medium'
-let g:gruvbox_improved_warnings=1
 
 " `vim-go` options.
 let g:go_highlight_build_constraints = 1
@@ -166,6 +171,11 @@ syntax on           " Set syntax highlight.
 filetype on         " Enable type file detection.
 filetype plugin on  " Enable plugins and load plugin for the detected file type.
 filetype indent on  " Load an indent file for the detected file type.
+
+" Cursor settings.
+set guicursor=
+set cursorline
+set nocursorcolumn
 
 " External vim behaviour.
 set autochdir               " Change current dir (same as open file).
@@ -200,11 +210,6 @@ set tabstop=4     " Set tab width to 4 columns.
 set softtabstop=4 " Number of spaces inside INSERT mode.
 set shiftwidth=4  " Default shift width for auto indenting.
 set expandtab     " Use space characters instead of tabs.
-
-" Cursor settings.
-set guicursor=
-set nocursorline
-set nocursorcolumn
 
 " Search settings.
 set ignorecase  " Ignore case while searching.
