@@ -1,7 +1,7 @@
 " Get the defaults that most users want.
 " source $VIMRUNTIME/defaults.vim
 
-" AUTOMATIONS --------------------------------------------------------------
+" AUTOMATIONS ------------------------------------------------------------------
 
 " Install plug.vim if not installed yet.
 let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
@@ -96,16 +96,16 @@ Plug 'itchyny/vim-gitbranch'
 " -------------------------- Syntax highlighting.
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 " -------------------------- Color schemes.
- Plug 'morhetz/gruvbox'
-" Plug 'rose-pine/vim'
-" Plug 'catppuccin/vim', { 'as': 'catppuccin' }
+Plug 'morhetz/gruvbox'
+Plug 'rose-pine/vim'
+Plug 'catppuccin/vim', { 'as': 'catppuccin' }
 call plug#end()
 
 " GLOBAL VARIABLES ------------------------------------------------------------
 
 " `lightline` options.
 let g:lightline = {
-    \ 'colorscheme': 'one',
+    \ 'colorscheme': 'wombat',
     \ 'tabline': {
     \   'left': [['tabs']],
     \   'right': []
@@ -133,11 +133,11 @@ let &t_ZH="\e[3m"
 let &t_ZR="\e[23m"
 
 " `rose-pine` options.
-let g:disable_bg = 1
-let g:disable_float_bg = 1
+let g:disable_bg=1
+let g:disable_float_bg=1
 
 " `gruvbox` options.
-let g:gruvbox_bold=1
+let g:gruvbox_bold=0
 let g:gruvbox_italic=1
 let g:gruvbox_invert_selection=0
 let g:gruvbox_contrast_dark='hard'
@@ -160,7 +160,7 @@ let g:go_highlight_fields = 1
 let g:go_highlight_methods = 1
 let g:go_highlight_operators = 1
 
-" LAYOUT & SETTINGS ---------------------------------------------------------------
+" LAYOUT & SETTINGS -----------------------------------------------------------
 
 " Color schemes should be loaded after plug#end().
 " Prepend it with 'silent!' to ignore errors when it's not yet installed.
@@ -174,7 +174,7 @@ filetype indent on  " Load an indent file for the detected file type.
 
 " Cursor settings.
 set guicursor=
-set cursorline
+set nocursorline
 set nocursorcolumn
 
 " External vim behaviour.
