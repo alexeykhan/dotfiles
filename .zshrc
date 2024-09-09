@@ -135,7 +135,7 @@ export GOPROXY="https://proxy.golang.org,direct"
 export GONOPROXY="gitlab.com/hiveon/*,pkg.hiveon.dev/*,github.com/alexeykhan/*,gitlab.com/uzmetrics/*,github.com/stargodev/*"
 export GOPRIVATE="gitlab.com/hiveon/*,pkg.hiveon.dev/*,github.com/alexeykhan/*,gitlab.com/uzmetrics/*,github.com/stargodev/*"
 export GONOSUMDB="gitlab.com/hiveon/*,pkg.hiveon.dev/*,github.com/alexeykhan/*,gitlab.com/uzmetrics/*,github.com/stargodev/*"
-export PGPASSFILE="~/.pgpass"
+export PGPASSFILE=~/.pgpass
 
 #Global Binaries
 export PATH=$PATH:/usr/bin
@@ -161,3 +161,6 @@ if [ -f "/Users/alexeykhan/Downloads/google-cloud-sdk/completion.zsh.inc" ]; the
 fi
 
 # ======================================================================
+
+# Jump into specific tmux session.
+# bindkey -s ^f "tmux-sessionizer\n"
