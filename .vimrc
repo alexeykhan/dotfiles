@@ -178,7 +178,6 @@ set nocursorline
 set nocursorcolumn
 
 " External vim behaviour.
-set autochdir               " Change current dir (same as open file).
 set noswapfile              " Turns swapfiles off.
 set nobackup                " Turns backup files off.
 set undofile                " Turns undofiles on.
